@@ -82,7 +82,7 @@ class ApplicationController extends BaseController {
         }
 
 
-        $text = strip_tags(str_replace('</p><p>', "\n\n", $text));
+        $text = '    ' . trim(strip_tags(str_replace('</p><p>', "\n\n", $text)));
 
         /**
          * Создаем подпись
