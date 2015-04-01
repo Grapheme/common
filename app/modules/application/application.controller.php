@@ -215,7 +215,7 @@ class ApplicationController extends BaseController {
         /**
          * Отправляем на почту юзеру
          */
-        Mail::send('emails.signature-app', [], function ($message) use ($email, $sign_result) {
+        Mail::send('emails.signature-app', compact('sign_result'), function ($message) use ($email, $sign_result) {
 
             $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
 
