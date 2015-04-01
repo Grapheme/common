@@ -32,6 +32,7 @@ class ApplicationController extends BaseController {
         $file_bg = $app_path . '/bg.png';
         $file_font = $app_path . '/webfont.ttf';
         $file_sign = $app_path . '/sign.png';
+        $remove_sign_file = false;
 
         $font_path = $file_font;
         $font_size = 24;
@@ -60,9 +61,26 @@ class ApplicationController extends BaseController {
         $text = '<p>Уникальная деталь Вашего характера – <strong>реалистичный взгляд на окружающий мир</strong>. В подписи также проявляются черты, свойственные людям, способным быстро ориентироваться в ситуации.</p><p>Вы обладаете <strong>стратегическими способностями, а  обстоятельность, усидчивость, настойчивость</strong> позволяют реализовывать многогранные бизнес-проекты.</p><p>Также в профессиональной деятельности <strong>верное решение Вам помогает принять жизненный опыт</strong>.</p><p>В обществе <strong>Вы проявляете повышенные требования к окружающим и избирательность</strong>. Благодаря такому амбициозному подходу, Вы добиваетесь поставленных целей.</p><p>В почерке находит отражение <strong>Ваша способность убеждать</strong>.</p><p><strong>В личной жизни Вы цените постоянство.</strong></p><p><strong>Вы интересный собеседник</strong> и всегда объективно излагаете свою позицию.</p><p>Широкий круг Ваших интересов позволяет быть активным всегда и везде. Вам нравятся светские мероприятия в клубах и вечеринки на открытом воздухе.</p><p>Уникальное сочетание деталей в подписи отражает Вашу индивидуальность.</p>';
         $email = 'az@grapheme.ru';
 
-        $text = strip_tags(str_replace('</p><p>', "\n\n", $text));
-
         /***************************************************************************************/
+
+
+        if (Input::get('text'))
+            $text = Input::get('text');
+
+        if (Input::get('email'))
+            $email = Input::get('email');
+
+        if (Input::get('image')) {
+
+            $tmp = explode(',', Input::get('image'));
+            $img_data = base64_decode($tmp[1]);
+            $file_sign = $app_path . '/' . sha1($img_data) . '.png';
+            file_put_contents($file_sign, $img_data);
+            $remove_sign_file = true;
+        }
+
+
+        $text = strip_tags(str_replace('</p><p>', "\n\n", $text));
 
         /**
          * Создаем подпись
@@ -185,11 +203,18 @@ class ApplicationController extends BaseController {
         }
 
 
-        #$img->save($dest_path);
+        $img->save($file_sign . '_sign.png');
         #$img->destroy();
 
-        header('Content-Type: image/png');
-        echo $img->encode('png');
+        #if ($remove_sign_file)
+        #    unlink($file_sign);
+
+        #unlink($file_sign . '_sign.png');
+
+        #header('Content-Type: image/png');
+        #echo $img->encode('png');
+
+        return 1;
     }
 
 }
