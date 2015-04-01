@@ -223,6 +223,7 @@ class ApplicationController extends BaseController {
 
 
 
+
 function cors() {
 
     // Allow from any origin
