@@ -209,11 +209,6 @@ class ApplicationController extends BaseController {
         $img->save($sign_result);
         #$img->destroy();
 
-        #if ($remove_sign_file)
-        #    unlink($file_sign);
-
-        #unlink($file_sign . '_sign.png');
-
         #header('Content-Type: image/png');
         #echo $img->encode('png');
 
@@ -239,7 +234,10 @@ class ApplicationController extends BaseController {
 
         });
 
+        if ($remove_sign_file)
+            unlink($file_sign);
 
+        unlink($sign_result);
 
         return 1;
     }
