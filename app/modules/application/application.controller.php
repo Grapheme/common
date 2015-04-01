@@ -207,7 +207,7 @@ class ApplicationController extends BaseController {
 
         $sign_result = $file_sign . '_sign.png';
         $img->save($sign_result);
-        #$img->destroy();
+        $img->destroy();
 
         #header('Content-Type: image/png');
         #echo $img->encode('png');
@@ -215,7 +215,7 @@ class ApplicationController extends BaseController {
         /**
          * Отправляем на почту юзеру
          */
-        Mail::send('emails.signature-app', compact('sign_result'), function ($message) use ($email, $sign_result) {
+        Mail::send('emails.signature-app', compact('sign_result', 'email'), function ($message) use ($email, $sign_result) {
 
             $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
 
