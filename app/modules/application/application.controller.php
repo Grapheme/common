@@ -82,7 +82,7 @@ class ApplicationController extends BaseController {
         }
 
 
-        $text = '    ' . trim(strip_tags(str_replace('</p><p>', "\n\n", $text)));
+        $text = trim(strip_tags(str_replace('</p><p>', "\n\n", $text)));
 
         /**
          * Создаем подпись
@@ -205,7 +205,8 @@ class ApplicationController extends BaseController {
         }
 
 
-        $img->save($file_sign . '_sign.png');
+        $sign_result = $file_sign . '_sign.png';
+        $img->save($sign_result);
         #$img->destroy();
 
         #if ($remove_sign_file)
@@ -215,6 +216,30 @@ class ApplicationController extends BaseController {
 
         #header('Content-Type: image/png');
         #echo $img->encode('png');
+
+        /**
+         * Отправляем на почту юзеру
+         */
+        Mail::send('emails.signature-app', [], function ($message) use ($email, $sign_result) {
+
+            $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
+
+            $message->subject('Анализ Вашей подписи');
+            $message->to($email);
+
+            /**
+             * Прикрепляем файл
+             */
+            /*
+            if (Input::hasFile('file') && ($file = Input::file('file')) !== NULL) {
+                #Helper::dd($file->getPathname() . ' / ' . $file->getClientOriginalName() . ' / ' . $file->getClientMimeType());
+                $message->attach($file->getPathname(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getClientMimeType()));
+            }
+            #*/
+
+        });
+
+
 
         return 1;
     }
