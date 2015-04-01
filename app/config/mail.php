@@ -23,8 +23,9 @@ return array(
     'encryption' => 'tls',
 
     'signature-app' => array(
-        'address' => 'support@grapheme.ru',
-        'name' => 'Support'
+        'address' => 'autograph@autograph-app.ru',
+        'name' => 'Графолог',
+        'subject' => 'Анализ Вашей подписи',
     ),
 
 

@@ -218,8 +218,7 @@ class ApplicationController extends BaseController {
         Mail::send('emails.signature-app', compact('sign_result', 'email'), function ($message) use ($email, $sign_result) {
 
             $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
-
-            $message->subject('Анализ Вашей подписи');
+            $message->subject(Config::get('mail.signature-app.subject'));
             $message->to($email);
 
             /**
@@ -231,7 +230,6 @@ class ApplicationController extends BaseController {
                 $message->attach($file->getPathname(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getClientMimeType()));
             }
             #*/
-
         });
 
         if ($remove_sign_file)
