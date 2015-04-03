@@ -49,8 +49,8 @@ class ApplicationController extends BaseController {
         $text = Input::get('text');
         $email = Input::get('email');
 
-        $av_top_offset = 100; // отступ сверху от края фона до подписи
-        $av_bottom_offset = 100; // отступ снизу от подписи
+        $av_top_offset = 60; // отступ сверху от края фона до подписи
+        $av_bottom_offset = 60; // отступ снизу от подписи
 
         ## Поправочный коэффициент, непонятно почему его приходится вводить..
         ## Видимо imagettfbbox считает ширину получаемого блока с ошибкой.
