@@ -31,14 +31,16 @@ class ApplicationController extends BaseController {
 
         $app_path = public_path('uploads/app-signature');
 
-        $file_bg = $app_path . '/bg.png';
+        #$file_bg = $app_path . '/bg.png';
+        $file_bg = $app_path . '/bg2.png';
         $file_font = $app_path . '/webfont.ttf';
         $file_sign = $app_path . '/sign.png';
         $remove_sign_file = false;
 
         $font_path = $file_font;
         $font_size = 24;
-        $font_color = '#ffffff';
+        #$font_color = '#ffffff';
+        $font_color = '#232c52';
 
         ## Способ выравнивания текста
         $align = "left";
