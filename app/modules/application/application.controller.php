@@ -63,7 +63,8 @@ class ApplicationController extends BaseController {
 
         $signature = '';
         $text = '<p>Уникальная деталь Вашего характера – <strong>реалистичный взгляд на окружающий мир</strong>. В подписи также проявляются черты, свойственные людям, способным быстро ориентироваться в ситуации.</p><p>Вы обладаете <strong>стратегическими способностями, а  обстоятельность, усидчивость, настойчивость</strong> позволяют реализовывать многогранные бизнес-проекты.</p><p>Также в профессиональной деятельности <strong>верное решение Вам помогает принять жизненный опыт</strong>.</p><p>В обществе <strong>Вы проявляете повышенные требования к окружающим и избирательность</strong>. Благодаря такому амбициозному подходу, Вы добиваетесь поставленных целей.</p><p>В почерке находит отражение <strong>Ваша способность убеждать</strong>.</p><p><strong>В личной жизни Вы цените постоянство.</strong></p><p><strong>Вы интересный собеседник</strong> и всегда объективно излагаете свою позицию.</p><p>Широкий круг Ваших интересов позволяет быть активным всегда и везде. Вам нравятся светские мероприятия в клубах и вечеринки на открытом воздухе.</p><p>Уникальное сочетание деталей в подписи отражает Вашу индивидуальность.</p>';
-        $email = 'az@grapheme.ru';
+        #$email = 'az@grapheme.ru';
+        $email = NULL;
 
         /***************************************************************************************/
 
@@ -217,23 +218,24 @@ class ApplicationController extends BaseController {
         /**
          * Отправляем на почту юзеру
          */
-        Mail::send('emails.signature-app', compact('sign_result'), function ($message) use ($email, $sign_result) {
+        if ($email)
+            Mail::send('emails.signature-app', compact('sign_result'), function ($message) use ($email, $sign_result) {
 
-            $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
-            $message->subject(Config::get('mail.signature-app.subject'));
-            #$message->subject('Анализ Вашей подписи');
-            $message->to($email);
+                $message->from(Config::get('mail.signature-app.address'), Config::get('mail.signature-app.name'));
+                $message->subject(Config::get('mail.signature-app.subject'));
+                #$message->subject('Анализ Вашей подписи');
+                $message->to($email);
 
-            /**
-             * Прикрепляем файл
-             */
-            /*
-            if (Input::hasFile('file') && ($file = Input::file('file')) !== NULL) {
-                #Helper::dd($file->getPathname() . ' / ' . $file->getClientOriginalName() . ' / ' . $file->getClientMimeType());
-                $message->attach($file->getPathname(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getClientMimeType()));
-            }
-            #*/
-        });
+                /**
+                 * Прикрепляем файл
+                 */
+                /*
+                if (Input::hasFile('file') && ($file = Input::file('file')) !== NULL) {
+                    #Helper::dd($file->getPathname() . ' / ' . $file->getClientOriginalName() . ' / ' . $file->getClientMimeType());
+                    $message->attach($file->getPathname(), array('as' => $file->getClientOriginalName(), 'mime' => $file->getClientMimeType()));
+                }
+                #*/
+            });
 
         if ($remove_sign_file)
             unlink($file_sign);
