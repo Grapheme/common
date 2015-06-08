@@ -16,9 +16,17 @@
                 {{ Helper::ta($data) }}
                 <tr>
                     <td class="text-center">
-                        <img src="uploads/eve/{{ $face->image }}" width="200" />
+                        <img src="{{ URL::to('/uploads/eve/' . $face->image) }}" width="200" />
                     </td>
                     <td>
+                        <p>
+                            <strong>
+                                {{ $data['name'] }}
+                                {{ $data['lastname'] }}
+                            </strong>
+                            <br/>
+                            {{ $face->city }}
+                        </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
                                 <i class="fa fa-mobile-phone"></i>
