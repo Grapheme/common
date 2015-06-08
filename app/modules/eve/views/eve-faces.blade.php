@@ -119,6 +119,8 @@
                         //alert("success");
                         if (result.hide) {
                             $($line).slideUp("slow");
+                        } else {
+                            $($buttons).removeAttr('disabled');
                         }
                     })
                     .fail(function () {
