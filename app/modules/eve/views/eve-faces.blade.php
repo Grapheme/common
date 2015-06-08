@@ -11,7 +11,7 @@
         <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">Одобренные</a>
         <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">Отложенные</a>
         <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">Отклоненные</a>
-        @if (Allow::action('eve', 'moderate'))
+        @if (Allow::action('eve', 'clear'))
             |
             <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return confirm('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')" target="_blank">Очистить базу</a>
         @endif
