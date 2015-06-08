@@ -12,15 +12,23 @@
                 $data = json_decode($face->data, true);
                 ?>
 
-                {{--{{ Helper::ta($face) }}--}}
+                {{ Helper::ta($face) }}
+                {{ Helper::ta($data) }}
                 <tr>
-                    <td>
-                        <img src="{{ public_path('uploads/eve/' . $face->image) }}" width="200" />
+                    <td class="text-center">
+                        <img src="uploads/eve/{{ $face->image }}" width="200" />
                     </td>
                     <td>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
-                                <i class="fa fa-mobile-phone" /> {{ $data['phone'] }}
+                                <i class="fa fa-mobile-phone"></i>
+                                {{ $data['phone'] }}
+                            </p>
+                        @endif
+                        @if (isset($data['phone']) && $data['phone'] != '')
+                            <p>
+                                <i class="fa fa-mobile-phone"></i>
+                                {{ $data['phone'] }}
                             </p>
                         @endif
                     </td>
