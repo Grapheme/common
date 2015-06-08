@@ -7,10 +7,10 @@
     <h1>EVE - Лица</h1>
 
     <p>
-        <a href="?status=0" class="btn btn-normal">Новые</a>
-        <a href="?status=1" class="btn btn-success">Одобренные</a>
-        <a href="?status=2" class="btn btn-warning">Отложенные</a>
-        <a href="?status=3" class="btn btn-danger">Отклоненные</a>
+        <a href="?filter_status=0&order_by=created_at&order_type=ASC" class="btn btn-default">Новые</a>
+        <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">Одобренные</a>
+        <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">Отложенные</a>
+        <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">Отклоненные</a>
     </p>
     <br/>
 
