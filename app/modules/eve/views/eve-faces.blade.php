@@ -30,7 +30,7 @@
 {{--                {{ Helper::ta($data) }}--}}
                 <tr>
                     <td class="text-center">
-                        <a href="{{ URL::to('/uploads/eve/' . $face->image) }}">
+                        <a href="{{ URL::to('/uploads/eve/' . $face->image) }}" target="_blank">
                             <img src="{{ URL::to('/uploads/eve/' . $face->image) }}" width="200" />
                         </a>
                     </td>
