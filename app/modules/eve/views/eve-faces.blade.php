@@ -7,11 +7,12 @@
     <h1>EVE - Лица</h1>
 
     <p>
-        <a href="?status=0" class="btn">Новые</a>
+        <a href="?status=0" class="btn btn-normal">Новые</a>
         <a href="?status=1" class="btn btn-success">Одобренные</a>
         <a href="?status=2" class="btn btn-warning">Отложенные</a>
         <a href="?status=3" class="btn btn-danger">Отклоненные</a>
     </p>
+    <br/>
 
 	@if ($count = @count($faces))
 
