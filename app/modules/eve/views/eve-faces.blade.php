@@ -52,7 +52,7 @@
                         @endif
                         @if (isset($data['answer']) && $data['answer'] != '')
                             <p>
-                                <i class="fa fa-fw fa-qoute-left"></i>
+                                <i class="fa fa-fw fa-quote-left"></i>
                                 {{ $data['answer'] }}
                             </p>
                         @endif
