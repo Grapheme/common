@@ -12,9 +12,10 @@ class EveController extends BaseController {
 
         Route::group(array('prefix' => 'admin/' . self::$name), function() {
 
-            Route::any('load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
             Route::any('faces', array('as' => 'eve.faces', 'uses' => __CLASS__.'@getEveFaces'));
         });
+
+        Route::any(self::$name . '/load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
     }
 
 
