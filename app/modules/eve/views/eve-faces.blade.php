@@ -4,6 +4,15 @@
 
 @section('content')
 
+    <h1>EVE - Лица</h1>
+
+    <p>
+        <a href="?status=0" class="btn">Новые</a>
+        <a href="?status=1" class="btn btn-success">Одобренные</a>
+        <a href="?status=2" class="btn btn-warning">Отложенные</a>
+        <a href="?status=3" class="btn btn-danger">Отклоненные</a>
+    </p>
+
 	@if ($count = @count($faces))
 
         <table class="table table-striped table-bordered min-table white-bg">
@@ -29,7 +38,7 @@
                         </p>
                         <p>
                             <button class="btn btn-success">Одобрить</button>
-                            <button class="btn btn-warning">Пропустить</button>
+                            <button class="btn btn-warning">Отложить</button>
                             <button class="btn btn-danger">Отклонить</button>
                         </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
