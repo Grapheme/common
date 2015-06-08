@@ -88,7 +88,7 @@ class EveController extends BaseController {
             $faces = $faces->where('city', $filter_city);
 
         if ($filter_status)
-            $faces = $faces->where('status', $filter_status);
+            $faces = $faces->where('status', '=', (string)$filter_status);
 
         if ($order_by && in_array($order_by, $order_bys)) {
 
