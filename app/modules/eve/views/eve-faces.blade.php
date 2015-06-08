@@ -27,6 +27,10 @@
                             <br/>
                             {{ $face->city }}
                         </p>
+                        <p>
+                            <button class="btn btn-success">Одобрить</button>
+                            <button class="btn btn-warning">Отклонить</button>
+                        </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
                                 <i class="fa fa-fw fa-mobile-phone"></i>
