@@ -124,6 +124,7 @@ class EveController extends BaseController {
             $destinationPath = $app_path;
             $fileName = sha1($image->getClientOriginalName() . '_' . microtime()) . '.jpg';
             $image->move($destinationPath, $fileName);
+            $image = $fileName;
         }
 
         if ($city !== NULL && $data !== NULL && $image !== NULL) {
