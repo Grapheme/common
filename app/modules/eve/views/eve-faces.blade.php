@@ -53,7 +53,9 @@
                         @if (isset($data['answer']) && $data['answer'] != '')
                             <p>
                                 <i class="fa fa-fw fa-quote-left"></i>
-                                {{ $data['answer'] }}
+                                <i>
+                                    {{ $data['answer'] }}
+                                </i>
                             </p>
                         @endif
                     </td>
