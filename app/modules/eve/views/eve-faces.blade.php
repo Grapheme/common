@@ -74,7 +74,7 @@
             @endforeach
         </table>
 
-        {{ $faces->links() }}
+        {{ $faces->append(Input::all())->links() }}
 
 	@else
 

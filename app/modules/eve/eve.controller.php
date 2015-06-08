@@ -144,7 +144,23 @@ class EveController extends BaseController {
 
     public function changeStatus() {
 
-        Helper::ta(Input::all());
+        $json_response = ['status' => false];
+
+        #Helper::ta(Input::all());
+        $id = (int)Input::get('id');
+        $status = (int)Input::get('status');
+
+        $statuses = [1, 2, 3];
+
+        if (in_array($status, $statuses)) {
+
+            $face = new EveFace();
+            $face->where('id', $id)->update(['status' => $status]);
+            $face->touch();
+            $json_response['status'] = true;
+        }
+
+        return Response::json($json_response, 200);
     }
 }
 
