@@ -33,10 +33,17 @@
                                 {{ $data['phone'] }}
                             </p>
                         @endif
-                        @if (isset($data['phone']) && $data['phone'] != '')
+                        @if (isset($data['vk']) && $data['vk'] != '')
                             <p>
-                                <i class="fa fa-mobile-phone"></i>
-                                {{ $data['phone'] }}
+                                <i class="fa fa-vk"></i>
+                                <a href="https://vk.com/{{ $data['vk'] }}" target="_blank">{{ $data['vk'] }}</a>
+                            </p>
+                        @endif
+                        @if (isset($data['instagram']) && $data['instagram'] != '')
+                            <p>
+                                <i class="fa fa-instagram"></i>
+                                {{ $data['instagram'] }}
+                                <a href="https://instagram.com/{{ $data['instagram'] }}" target="_blank">{{ $data['instagram'] }}</a>
                             </p>
                         @endif
                     </td>
