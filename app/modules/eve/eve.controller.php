@@ -84,13 +84,13 @@ class EveController extends BaseController {
 
         $faces = (new EveFace);
 
-        if ($filter_city)
+        if ($filter_city != '')
             $faces = $faces->where('city', $filter_city);
 
-        if ($filter_status)
+        if ($filter_status != '')
             $faces = $faces->where('status', '=', (string)$filter_status);
 
-        if ($order_by && in_array($order_by, $order_bys)) {
+        if ($order_by != '' && in_array($order_by, $order_bys)) {
 
             if (!in_array($order_type, $order_types))
                 $order_type = 'ASC';
