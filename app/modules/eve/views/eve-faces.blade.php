@@ -6,11 +6,28 @@
 
 	@if ($count = @count($faces))
 
-        @foreach ($faces as $face)
+        <table class="table table-striped table-bordered min-table white-bg">
+            @foreach ($faces as $face)
+                <?
+                $data = json_decode($face->data, true);
+                ?>
 
-            {{ Helper::ta($face) }}
+                {{--{{ Helper::ta($face) }}--}}
+                <tr>
+                    <td>
+                        <img src="{{ public_path('uploads/eve/' . $face->image) }}" width="200" />
+                    </td>
+                    <td>
+                        @if (isset($data['phone']) && $data['phone'] != '')
+                            <p>
+                                <i class="fa fa-mobile-phone" /> {{ $data['phone'] }}
+                            </p>
+                        @endif
+                    </td>
+                </tr>
 
-        @endforeach
+            @endforeach
+        </table>
 
         {{ $faces->links() }}
 
