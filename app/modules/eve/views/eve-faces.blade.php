@@ -12,8 +12,8 @@
                 $data = json_decode($face->data, true);
                 ?>
 
-                {{ Helper::ta($face) }}
-                {{ Helper::ta($data) }}
+{{--                {{ Helper::ta($face) }}--}}
+{{--                {{ Helper::ta($data) }}--}}
                 <tr>
                     <td class="text-center">
                         <img src="{{ URL::to('/uploads/eve/' . $face->image) }}" width="200" />
@@ -29,7 +29,7 @@
                         </p>
                         <p>
                             <button class="btn btn-success">Одобрить</button>
-                            <button class="btn btn-warning">Отклонить</button>
+                            <button class="btn btn-danger">Отклонить</button>
                         </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
@@ -47,6 +47,12 @@
                             <p>
                                 <i class="fa fa-fw fa-instagram"></i>
                                 <a href="https://instagram.com/{{ $data['instagram'] }}" target="_blank">{{ $data['instagram'] }}</a>
+                            </p>
+                        @endif
+                        @if (isset($data['answer']) && $data['answer'] != '')
+                            <p>
+                                <i class="fa fa-fw fa-qoute-left"></i>
+                                {{ $data['answer'] }}
                             </p>
                         @endif
                     </td>
