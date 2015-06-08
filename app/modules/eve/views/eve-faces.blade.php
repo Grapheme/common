@@ -37,7 +37,7 @@
                             <br/>
                             {{ $face->city }}
                             <br/>
-                            {{ $face->created_at->format('d.m.Y') }}
+                            {{ $face->created_at->format('d.m.Y H:i:s') }} # {{ $face->id }}
                         </p>
                         <p data-id="{{ $face->id }}">
                             <button class="btn btn-success change_status_button" data-status="1">Одобрить</button>

@@ -128,7 +128,11 @@ class EveController extends BaseController {
             $image = $fileName;
         }
 
-        if ($city !== NULL && $data !== NULL && $image !== NULL) {
+        if (
+            ($city !== NULL && $data !== NULL && $image !== NULL)
+            || !trim($data)
+            || !trim($image)
+        ) {
 
             EveFace::create([
                 'city' => $city,
