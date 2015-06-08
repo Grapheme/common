@@ -115,6 +115,7 @@
                 method: "POST"
             })
                     .done(function (result) {
+                        console.log(result);
                         //alert("success");
                         if (result.hide) {
                             $($line).slideUp("slow");
