@@ -91,7 +91,7 @@ class EveController extends BaseController {
 
         if ($order_by && in_array($order_by, $order_bys)) {
 
-            if (!is_array($order_type, $order_types))
+            if (!in_array($order_type, $order_types))
                 $order_type = 'ASC';
 
             $faces = $faces->orderBy($order_by, $order_type);
