@@ -183,12 +183,14 @@ class EveController extends BaseController {
 
         Allow::permission('eve', 'clear');
 
-
         (new EveFace)->where('id', '>', 0)->delete();
+
         $files = glob(public_path('uploads/eve/*'));
         if (count($files)) {
 
             foreach ($files as $file) {
+                if (basename($file) == '.gitkeep')
+                    continue;
                 @unlink($file);
             }
         }
