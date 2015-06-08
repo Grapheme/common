@@ -145,6 +145,7 @@ class EveController extends BaseController {
     public function changeStatus() {
 
         $json_response = ['status' => false];
+        $json_response['hide'] = false;
 
         #Helper::ta(Input::all());
         $id = (int)Input::get('id');
@@ -155,7 +156,12 @@ class EveController extends BaseController {
         if (in_array($status, $statuses)) {
 
             $face = new EveFace();
-            $face->where('id', $id)->update(['status' => $status]);
+            $face->where('id', $id)->first();
+            if ($face->status != $status) {
+
+                $face->update(['status' => $status]);
+                $json_response['hide'] = true;
+            }
             $face->touch();
             $json_response['status'] = true;
         }

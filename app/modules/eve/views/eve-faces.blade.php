@@ -114,9 +114,11 @@
                 data: {'id': $id, 'status': $status},
                 method: "POST"
             })
-                    .done(function () {
+                    .done(function (result) {
                         //alert("success");
-                        $($line).slideUp();
+                        if (result.hide) {
+                            $($line).slideUp("slow");
+                        }
                     })
                     .fail(function () {
                         //alert("error");
