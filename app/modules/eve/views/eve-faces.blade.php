@@ -101,7 +101,7 @@
         $('.change_status_button').click(function(){
             var $button = $(this);
             var $status = $($button).data('status');
-            var $id = $($button).parent('id');
+            var $id = $($button).parent().data('id');
 
             alert($id + " > " + $status);
         });
