@@ -100,10 +100,14 @@
     <script>
         $('.change_status_button').click(function(){
             var $button = $(this);
+            var $buttons = $($button).parent().find('button');
+            var $line = $($button).parents('tr');
             var $status = $($button).data('status');
             var $id = $($button).parent().data('id');
 
             //alert($id + " > " + $status);
+
+            $($buttons).attr('disabled', 'disabled');
 
             $.ajax({
                 url: "{{ URL::route('eve.change_status') }}",
@@ -111,13 +115,15 @@
                 method: "POST"
             })
                     .done(function () {
-                        alert("success");
+                        //alert("success");
+                        $($line).slideUp();
                     })
                     .fail(function () {
-                        alert("error");
+                        //alert("error");
+                        $($buttons).removeAttr('disabled');
                     })
                     .always(function () {
-                        alert("complete");
+                        //alert("complete");
                     });
         });
     </script>
