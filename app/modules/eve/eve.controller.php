@@ -14,6 +14,7 @@ class EveController extends BaseController {
 
             Route::any('faces', array('as' => 'eve.faces', 'uses' => __CLASS__.'@getEveFaces'));
             Route::any('faces/change_status', array('as' => 'eve.change_status', 'uses' => __CLASS__.'@changeStatus'));
+            Route::any('faces/full_delete', array('as' => 'eve.full_delete', 'uses' => __CLASS__.'@fullDelete'));
         });
 
         Route::any(self::$name . '/load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
@@ -25,6 +26,7 @@ class EveController extends BaseController {
         return array(
             'view'         => 'Просмотр',
             'moderate'     => 'Доступ к модерированию',
+            'clear'        => 'Полная очистка БД',
         );
     }
 
@@ -72,6 +74,8 @@ class EveController extends BaseController {
 
 
     public function getEveFaces() {
+
+        Allow::permission('eve', 'view');
 
         $pagination_limit = 10;
         $order_by = Input::get('order_by');
@@ -148,6 +152,8 @@ class EveController extends BaseController {
 
     public function changeStatus() {
 
+        Allow::permission('eve', 'moderate');
+
         $json_response = ['status' => false];
         $json_response['hide'] = false;
 
@@ -171,6 +177,15 @@ class EveController extends BaseController {
         }
 
         return Response::json($json_response, 200);
+    }
+
+    public function fullDelete() {
+
+        Allow::permission('eve', 'clear');
+
+        (new EveFace)->delete();
+
+        echo "EVE records cleared.";
     }
 }
 
