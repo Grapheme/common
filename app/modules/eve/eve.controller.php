@@ -13,6 +13,7 @@ class EveController extends BaseController {
         Route::group(array('prefix' => 'admin/' . self::$name), function() {
 
             Route::any('faces', array('as' => 'eve.faces', 'uses' => __CLASS__.'@getEveFaces'));
+            Route::any('faces/{id}/change_status', array('as' => 'eve.change_status', 'uses' => __CLASS__.'@changeStatus'));
         });
 
         Route::any(self::$name . '/load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
@@ -138,6 +139,13 @@ class EveController extends BaseController {
         }
 
         return Response::json($json_response, 200);
+    }
+
+
+    public function changeStatus($id) {
+
+        Helper::ta($id);
+        Helper::ta(Input::all());
     }
 }
 

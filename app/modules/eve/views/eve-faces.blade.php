@@ -37,10 +37,10 @@
                             <br/>
                             {{ $face->city }}
                         </p>
-                        <p>
-                            <button class="btn btn-success">Одобрить</button>
-                            <button class="btn btn-warning">Отложить</button>
-                            <button class="btn btn-danger">Отклонить</button>
+                        <p data-id="{{ $face->id }}">
+                            <button class="btn btn-success change_status_button" data-status="1">Одобрить</button>
+                            <button class="btn btn-warning change_status_button" data-status="2">Отложить</button>
+                            <button class="btn btn-danger change_status_button" data-status="3">Отклонить</button>
                         </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
@@ -97,5 +97,14 @@
 
 
 @section('scripts')
+    <script>
+        $('.change_status_button').click(function(){
+            var $button = $(this);
+            var $status = $($button).data('status');
+            var $id = $($button).parent('id');
+
+            alert($id + " > " + $status);
+        });
+    </script>
 @stop
 
