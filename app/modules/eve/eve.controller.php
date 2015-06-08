@@ -183,7 +183,8 @@ class EveController extends BaseController {
 
         Allow::permission('eve', 'clear');
 
-        (new EveFace)->delete();
+
+        (new EveFace)->where('id')->delete();
 
         echo "EVE records cleared.";
     }
