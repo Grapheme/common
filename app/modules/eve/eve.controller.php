@@ -3,20 +3,50 @@
 class EveController extends BaseController {
 
     public static $name = 'eve';
-    public static $group = 'application';
+    public static $group = 'eve';
 
     /****************************************************************************/
 
     ## Routing rules of module
     public static function returnRoutes($prefix = null) {
 
-        Route::group(array('prefix' => self::$name), function() {
+        Route::group(array('prefix' => 'admin/' . self::$name), function() {
 
             Route::any('load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
             Route::any('faces', array('as' => 'eve.faces', 'uses' => __CLASS__.'@getEveFaces'));
         });
     }
 
+
+    ## Actions of module (for distribution rights of users)
+    public static function returnActions() {
+        return array(
+            'view'         => 'Просмотр',
+            'moderate'     => 'Доступ к модерированию',
+        );
+    }
+
+    ## Info about module (now only for admin dashboard & menu)
+    public static function returnInfo() {
+        return array(
+            'name' => self::$name,
+            'group' => self::$group,
+            'title' => 'Eve - лица',
+            'visible' => 1,
+        );
+    }
+
+    ## Menu elements of the module
+    public static function returnMenu() {
+        return array(
+            array(
+                'title' => 'Eve - лица',
+                'link' => self::$group . '/' . 'faces',
+                'class' => 'fa-list-alt',
+                'permit' => 'view',
+            ),
+        );
+    }
 
     /****************************************************************************/
 
@@ -76,24 +106,30 @@ class EveController extends BaseController {
 
         cors();
 
-        Helper::tad(Input::all());
+        if (Input::get('debug') == 1)
+            Helper::tad(Input::all());
 
         $app_path = public_path('uploads/eve');
 
         $city = Input::get('city');
         $data = Input::get('data');
-        $image = Input::get('image');
 
-        /*
-        if (Input::get('image')) {
+        if (Input::hasFile('image')) {
 
-            $tmp = explode(',', Input::get('image'));
-            $img_data = base64_decode($tmp[1]);
-            $file = $app_path . '/' . sha1($img_data) . '.png';
-            file_put_contents($file, $img_data);
+            $image = Input::file('image');
+            $destinationPath = $app_path;
+            $fileName = sha1($image->getClientOriginalName() . '_' . microtime()) . '.jpg';
+            $image->move($destinationPath, $fileName);
         }
-        */
 
+        EveFace::create([
+            'city' => $city,
+            'data' => $data,
+            'image' => $image,
+        ]);
+
+        $json_response = ['status' => true];
+        return Response::json($json_response, 200);
     }
 }
 
