@@ -105,7 +105,11 @@
 
             //alert($id + " > " + $status);
 
-            $.ajax("{{ URL::route('eve.change_status') }}")
+            $.ajax({
+                url: "{{ URL::route('eve.change_status') }}",
+                data: {'id': $id, 'status': $status},
+                method: "POST"
+            })
                     .done(function () {
                         alert("success");
                     })
