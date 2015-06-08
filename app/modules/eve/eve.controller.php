@@ -110,10 +110,13 @@ class EveController extends BaseController {
         if (Input::get('debug') == 1)
             Helper::tad(Input::all());
 
+        $json_response = ['status' => false];
+
         $app_path = public_path('uploads/eve');
 
         $city = Input::get('city');
         $data = Input::get('data');
+        $image = NULL;
 
         if (Input::hasFile('image')) {
 
@@ -123,13 +126,16 @@ class EveController extends BaseController {
             $image->move($destinationPath, $fileName);
         }
 
-        EveFace::create([
-            'city' => $city,
-            'data' => $data,
-            'image' => $image,
-        ]);
+        if ($city !== NULL && $data !== NULL && $image !== NULL) {
 
-        $json_response = ['status' => true];
+            EveFace::create([
+                'city' => $city,
+                'data' => $data,
+                'image' => $image,
+            ]);
+            $json_response['status'] = true;
+        }
+
         return Response::json($json_response, 200);
     }
 }
