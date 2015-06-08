@@ -103,7 +103,18 @@
             var $status = $($button).data('status');
             var $id = $($button).parent().data('id');
 
-            alert($id + " > " + $status);
+            //alert($id + " > " + $status);
+
+            $.ajax("{{ URL::route('eve.change_status') }}")
+                    .done(function () {
+                        alert("success");
+                    })
+                    .fail(function () {
+                        alert("error");
+                    })
+                    .always(function () {
+                        alert("complete");
+                    });
         });
     </script>
 @stop
