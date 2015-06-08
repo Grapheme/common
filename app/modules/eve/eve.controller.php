@@ -185,6 +185,13 @@ class EveController extends BaseController {
 
 
         (new EveFace)->where('id', '>', 0)->delete();
+        $files = glob(public_path('uploads/eve/*'));
+        if (count($files)) {
+
+            foreach ($files as $file) {
+                @unlink($file);
+            }
+        }
 
         echo "EVE records cleared.";
     }
