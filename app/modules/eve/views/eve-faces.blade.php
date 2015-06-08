@@ -29,6 +29,7 @@
                         </p>
                         <p>
                             <button class="btn btn-success">Одобрить</button>
+                            <button class="btn btn-warning">Пропустить</button>
                             <button class="btn btn-danger">Отклонить</button>
                         </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
