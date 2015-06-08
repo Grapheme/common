@@ -19,7 +19,7 @@ class ApplicationController extends BaseController {
 
         Route::group(array('prefix' => 'eve'), function() {
 
-            Route::post('load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
+            Route::any('load_photo', array('as' => 'eve.load_photo', 'uses' => __CLASS__.'@postLoadPhoto'));
             Route::any('faces', array('as' => 'eve.faces', 'uses' => __CLASS__.'@getEveFaces'));
         });
     }
