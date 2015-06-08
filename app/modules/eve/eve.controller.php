@@ -156,7 +156,7 @@ class EveController extends BaseController {
         if (in_array($status, $statuses)) {
 
             $face = new EveFace();
-            $face->where('id', $id)->first();
+            $face = $face->where('id', $id)->first();
             if ($face->status != $status) {
 
                 $face->update(['status' => $status]);
