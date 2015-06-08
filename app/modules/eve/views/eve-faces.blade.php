@@ -12,7 +12,7 @@
         <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">Отложенные</a>
         <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">Отклоненные</a>
         |
-        <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return prompt('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')">Очистить базу</a>
+        <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return confirm('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')">Очистить базу</a>
     </p>
     <br/>
 
