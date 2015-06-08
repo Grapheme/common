@@ -11,8 +11,10 @@
         <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">Одобренные</a>
         <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">Отложенные</a>
         <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">Отклоненные</a>
-        |
-        <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return confirm('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')" target="_blank">Очистить базу</a>
+        @if (Allow::action('eve', 'moderate'))
+            |
+            <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return confirm('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')" target="_blank">Очистить базу</a>
+        @endif
     </p>
     <br/>
 
@@ -28,7 +30,9 @@
 {{--                {{ Helper::ta($data) }}--}}
                 <tr>
                     <td class="text-center">
-                        <img src="{{ URL::to('/uploads/eve/' . $face->image) }}" width="200" />
+                        <a href="{{ URL::to('/uploads/eve/' . $face->image) }}">
+                            <img src="{{ URL::to('/uploads/eve/' . $face->image) }}" width="200" />
+                        </a>
                     </td>
                     <td>
                         <p>

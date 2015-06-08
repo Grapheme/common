@@ -78,6 +78,7 @@ class EveController extends BaseController {
         Allow::permission('eve', 'view');
 
         $pagination_limit = 10;
+
         $order_by = Input::get('order_by');
         $order_type = Input::get('order_type');
         $filter_city = Input::get('filter_city');
