@@ -31,7 +31,7 @@
                             </div>
 
     					@foreach($mod_actions as $module_name => $actions)
-                        <? #Helper::d($module_name); ?>
+                        <? #Helper::d($module_name); echo ' - ' . (int)Allow::module($module_name); ?>
                         <? if (!Allow::module($module_name)) { continue; } ?>
                             <? if (!count($actions)) continue; ?>
                             <? $title = isset($mod_info[$module_name]['title']) ? $mod_info[$module_name]['title'] : $module_name; ?>

@@ -162,18 +162,30 @@ class EveController extends BaseController {
         $id = (int)Input::get('id');
         $status = (int)Input::get('status');
 
-        $statuses = [1, 2, 3];
+        $statuses = [1, 2, 3, -1];
 
         if (in_array($status, $statuses)) {
 
             $face = new EveFace();
             $face = $face->where('id', $id)->first();
-            if ($face->status != $status) {
 
-                $face->update(['status' => $status]);
+            if ($status == -1) {
+
+                ## DELETE
+                $face->delete();
+                unlink(public_path('uploads/eve/' . $face->image));
                 $json_response['hide'] = true;
+
+            } else {
+
+                ## Change status
+                if ($face->status != $status) {
+
+                    $face->update(['status' => $status]);
+                    $json_response['hide'] = true;
+                }
+                $face->touch();
             }
-            $face->touch();
             $json_response['status'] = true;
         }
 

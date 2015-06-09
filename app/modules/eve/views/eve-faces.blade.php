@@ -49,6 +49,7 @@
                             <button class="btn btn-success change_status_button" data-status="1">Одобрить</button>
                             <button class="btn btn-warning change_status_button" data-status="2">Отложить</button>
                             <button class="btn btn-danger change_status_button" data-status="3">Отклонить</button>
+                            <button class="btn btn-danger change_status_button" data-status="-1">Удалить</button>
                         </p>
                         @if (isset($data['phone']) && $data['phone'] != '')
                             <p>
@@ -59,7 +60,7 @@
                         @if (isset($data['vk']) && $data['vk'] != '')
                             <p>
                                 <i class="fa fa-fw fa-vk"></i>
-                                <a href="https://vk.com/{{ $data['vk'] }}" target="_blank">{{ $data['vk'] }}</a>
+                                <a href="https://vk.com/{{ (is_numeric($data['vk']) ? 'id' : '') . $data['vk'] }}" target="_blank">{{ $data['vk'] }}</a>
                             </p>
                         @endif
                         @if (isset($data['instagram']) && $data['instagram'] != '')
@@ -112,6 +113,11 @@
             var $line = $($button).parents('tr');
             var $status = $($button).data('status');
             var $id = $($button).parent().data('id');
+
+            if ($status == -1) {
+                if (!confirm('ВНИМАНИЕ! Запись будет окончательно удалена! Продолжить?'))
+                    return false;
+            }
 
             //alert($id + " > " + $status);
 

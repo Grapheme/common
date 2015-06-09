@@ -37,4 +37,19 @@ return array(
         'default_description' => '',
         'default_keywords'    => '',
     ],
+
+    ###############################################################
+
+    'marlboro' => [
+
+        ##
+        ## API Ya.Disk
+        ## https://oauth.yandex.ru/
+        ##
+        'app_id' => '5da408474db045fb9c9c5ff6f61e7545',
+        'app_pass' => 'e4c70cd5415e444988131051f865db7d',
+        ## Callback указывается в натсройках приложения
+        #'app_callback' => 'https://oauth.yandex.ru/verification_code',
+    ],
+
 );
