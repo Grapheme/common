@@ -79,10 +79,37 @@ class EveController extends BaseController {
 
         $pagination_limit = 10;
 
+        ## All cities
+        $all_city = (new EveFace())->distinct()->orderBy('city')->lists('city');
+        if (count($all_city)) {
+            $temp = [];
+            foreach ($all_city as $city) {
+                $temp[$city] = $city;
+            }
+            $all_city = $temp;
+        }
+        #Helper::smartQueries(1);
+        #Helper::tad($all_city);
+        $all_city = (array)$all_city;
+
+        ## Counts
+        $counts = (new EveFace())->select(DB::raw('status, COUNT(*) AS count'))->groupBy('status')->get();
+        #Helper::smartQueries(1);
+        #Helper::tad($counts);
+        if (count($counts)) {
+            $temp = [];
+            foreach ($counts as $count) {
+                $temp[$count->status] = $count->count;
+            }
+            $counts = $temp;
+        }
+        $counts = (array)$counts;
+
+        ## Order rules
         $order_by = Input::get('order_by');
         $order_type = Input::get('order_type');
         $filter_city = Input::get('filter_city');
-        $filter_status = Input::get('filter_status');
+        $filter_status = Input::get('filter_status') ?: '0';
 
         $order_bys = ['created_at', 'status'];
         $order_types = ['ASC', 'DESC'];
@@ -92,7 +119,7 @@ class EveController extends BaseController {
         if ($filter_city != '')
             $faces = $faces->where('city', $filter_city);
 
-        if ($filter_status != '')
+        if ($filter_status !== null && $filter_status !== '')
             $faces = $faces->where('status', '=', (string)$filter_status);
 
         if ($order_by != '' && in_array($order_by, $order_bys)) {
@@ -105,7 +132,7 @@ class EveController extends BaseController {
 
         $faces = $faces->paginate($pagination_limit);
 
-        return View::make($this->module['gtpl'].'eve-faces', compact('faces'));
+        return View::make($this->module['gtpl'].'eve-faces', compact('faces', 'all_city', 'counts'));
     }
 
 

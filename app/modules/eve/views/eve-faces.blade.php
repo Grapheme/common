@@ -7,10 +7,20 @@
     <h1>EVE - Лица</h1>
 
     <p>
-        <a href="?filter_status=0&order_by=created_at&order_type=ASC" class="btn btn-default">Новые</a>
-        <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">Одобренные</a>
-        <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">Отложенные</a>
-        <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">Отклоненные</a>
+        <a href="?filter_status=0&order_by=created_at&order_type=ASC" class="btn btn-default">
+            Новые ({{ @(int)$counts[0] }})
+        </a>
+        <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">
+            Одобренные ({{ @(int)$counts[1] }})
+        </a>
+        <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">
+            Отложенные ({{ @(int)$counts[2] }})
+        </a>
+        <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">
+            Отклоненные ({{ @(int)$counts[3] }})
+        </a>
+
+        {{ Form::select('filter_city', ['Фильтр по городу'] + $all_city, Input::get('filter_city'), ['class' => 'filter_city']) }}
         @if (Allow::action('eve', 'clear'))
             |
             <a href="{{ URL::route('eve.full_delete')  }}" class="btn btn-danger" onclick="return confirm('ВНИМАНИЕ! Будут удалены все данные. Продолжить?')" target="_blank">Очистить базу</a>
@@ -144,6 +154,14 @@
                     .always(function () {
                         //alert("complete");
                     });
+        });
+
+        $('select.filter_city').change(function(){
+            //console.log($(this).val());
+            var value = $(this).val();
+            if (value !== 0 && value !== '') {
+                location.href = '?filter_city=' + value + '&{{ Helper::arrayToUrlAttributes(Input::all()) }}';
+            }
         });
     </script>
 @stop
