@@ -8,15 +8,19 @@
 
     <p>
         <a href="?filter_status=0&order_by=created_at&order_type=ASC" class="btn btn-default">
+            {{ $filter_status == '0' ? '<i class="fa fa-check"></i>' : '' }}
             Новые ({{ @(int)$counts[0] }})
         </a>
         <a href="?filter_status=1&order_by=updated_at&order_type=DESC" class="btn btn-success">
+            {{ $filter_status == '1' ? '<i class="fa fa-check"></i>' : '' }}
             Одобренные ({{ @(int)$counts[1] }})
         </a>
         <a href="?filter_status=2&order_by=created_at&order_type=ASC" class="btn btn-warning">
+            {{ $filter_status == '2' ? '<i class="fa fa-check"></i>' : '' }}
             Отложенные ({{ @(int)$counts[2] }})
         </a>
         <a href="?filter_status=3&order_by=updated_at&order_type=DESC" class="btn btn-danger">
+            {{ $filter_status == '3' ? '<i class="fa fa-check"></i>' : '' }}
             Отклоненные ({{ @(int)$counts[3] }})
         </a>
 
@@ -160,7 +164,11 @@
             //console.log($(this).val());
             var value = $(this).val();
             if (value !== 0 && value !== '') {
-                location.href = '?filter_city=' + value + '&{{ Helper::arrayToUrlAttributes(Input::all()) }}';
+                <?php
+                $input = Input::all();
+                unset($input['filter_city']);
+                ?>
+                location.href = '?filter_city=' + value + '&{{ Helper::arrayToUrlAttributes($input) }}';
             }
         });
     </script>

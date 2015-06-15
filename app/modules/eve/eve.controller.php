@@ -132,7 +132,7 @@ class EveController extends BaseController {
 
         $faces = $faces->paginate($pagination_limit);
 
-        return View::make($this->module['gtpl'].'eve-faces', compact('faces', 'all_city', 'counts'));
+        return View::make($this->module['gtpl'].'eve-faces', compact('faces', 'all_city', 'counts', 'filter_status'));
     }
 
 
