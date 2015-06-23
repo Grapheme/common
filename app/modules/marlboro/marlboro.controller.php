@@ -109,15 +109,19 @@ class MarlboroController extends BaseController {
 
     public function getInfo() {
 
+        $json_response = ['status' => false];
+
         $input = [
             'user_id' => Input::get('id'),
             'city' => Input::get('city-chose'),
             'yad_name' => Input::get('yad_name'),
         ];
 
-        YaDiskVideo::create($input);
+        if ($input['user_id'] && $input['city'] && $input['yad_name']) {
 
-        $json_response = ['status' => true];
+            YaDiskVideo::create($input);
+            $json_response['status'] = true;
+        }
 
         return Response::json($json_response);
     }
