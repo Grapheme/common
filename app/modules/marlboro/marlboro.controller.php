@@ -13,7 +13,7 @@ class MarlboroController extends BaseController {
         Route::group(array('prefix' => 'admin/' . self::$group), function() {
 
             Route::any('token', array('as' => 'marlboro.token', 'uses' => __CLASS__.'@getYaDiskToken'));
-            Route::post('update_token', array('as' => 'marlboro.update_token', 'uses' => __CLASS__.'@updateToken'));
+            Route::any('update_token', array('as' => 'marlboro.update_token', 'uses' => __CLASS__.'@updateToken'));
 
             Route::any('read', array('as' => 'marlboro.read', 'uses' => __CLASS__.'@readYaDisk'));
 
