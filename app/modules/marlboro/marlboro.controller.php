@@ -188,6 +188,7 @@ window.close();
         #$filename = 'digital.sql.gz';
         $filename = Input::get('file');
 
+        /*
         ## Опции запроса
         $postfields = [
             'path' => '/',
@@ -196,8 +197,14 @@ window.close();
             'offset' => '0',
         ];
         ## Получаем список файлов в папке на Я.Диске
-        #$out = yadisk_request($this->token, '/resources', $postfields);
+        $out = yadisk_request($this->token, '/resources', $postfields);
+        #*/
 
+        ## Опции запроса
+        $postfields = [
+            'limit' => '10000',
+            'offset' => '0',
+        ];
         ## Получаем плоский список всех файлов
         $out = yadisk_request($this->token, '/resources/files', $postfields);
 
