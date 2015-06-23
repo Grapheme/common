@@ -190,7 +190,7 @@ window.close();
 
         ## Опции запроса
         $postfields = [
-            #'path' => '/backups',
+            'path' => '/',
             'sort' => 'created',
             'limit' => '100',
             'offset' => '0',
