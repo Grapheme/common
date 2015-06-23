@@ -4,15 +4,14 @@ class YaDiskVideo extends BaseModel {
 
     protected $guarded = array();
 
-    protected $table = 'ya_disk_video';
+    protected $table = 'marlboro_yadisk';
 
     ## http://laravel.ru/articles/odd_bod/your-first-model
     protected $fillable = array(
-        'status',
+        'user_id',
         'city',
-        'data',
-        'image',
-        'settings'
+        'yad_name',
+        'yad_link',
     );
 
 }

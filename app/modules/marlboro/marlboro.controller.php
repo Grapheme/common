@@ -17,6 +17,8 @@ class MarlboroController extends BaseController {
 
             Route::any('read', array('as' => 'marlboro.read', 'uses' => __CLASS__.'@readYaDisk'));
 
+            Route::any('get_info', array('as' => 'marlboro.get_info', 'uses' => __CLASS__.'@getInfo'));
+
             #Route::any('faces/change_status', array('as' => 'eve.change_status', 'uses' => __CLASS__.'@changeStatus'));
             #Route::any('faces/full_delete', array('as' => 'eve.full_delete', 'uses' => __CLASS__.'@fullDelete'));
         });
@@ -102,6 +104,22 @@ class MarlboroController extends BaseController {
         $token = $this->token;
 
         return View::make($this->module['gtpl'].'yadisk_token', compact('faces', 'token'));
+    }
+
+
+    public function getInfo() {
+
+        $input = [
+            'user_id' => Input::get('id'),
+            'city' => Input::get('city-chose'),
+            'yad_name' => Input::get('yad_name'),
+        ];
+
+        YaDiskVideo::create($input);
+
+        $json_response = ['status' => true];
+
+        return Response::json($json_response);
     }
 
 
