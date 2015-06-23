@@ -190,7 +190,7 @@ window.close();
 
         ## Опции запроса
         $postfields = [
-            'path' => '/backups',
+            #'path' => '/backups',
             'sort' => 'created',
             'limit' => '100',
             'offset' => '0',
@@ -198,6 +198,10 @@ window.close();
 
         ## Получаем список файлов в папке на Я.Диске
         $out = yadisk_request($this->token, '/resources', $postfields);
+
+        if (Input::get('debug') == 1) {
+            Helper::tad($out);
+        }
 
         ## Ищем нужный файл по имени среди всех переданных значений
         $file = null;
