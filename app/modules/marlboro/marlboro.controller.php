@@ -195,9 +195,11 @@ window.close();
             'limit' => '100',
             'offset' => '0',
         ];
-
         ## Получаем список файлов в папке на Я.Диске
-        $out = yadisk_request($this->token, '/resources', $postfields);
+        #$out = yadisk_request($this->token, '/resources', $postfields);
+
+        ## Получаем плоский список всех файлов
+        $out = yadisk_request($this->token, '/resources/files', $postfields);
 
         if (Input::get('debug') == 1) {
             Helper::tad($out);
