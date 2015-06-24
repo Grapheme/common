@@ -206,6 +206,14 @@ window.close();
         ## Если есть записи без видео - обработаем их
         if (count($records)) {
 
+            ## Перебираем все записи без ссылки, и формируем массив
+            $new_links = [];
+            foreach ($records as $record) {
+                #Helper::ta($record);
+                $new_links[$record->yad_name] = '';
+            }
+            $new_links_count = count($new_links);
+
             ## Опции запроса
             $postfields = [
                 'limit' => '10000',
@@ -215,6 +223,27 @@ window.close();
             ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
             $out = yadisk_request($this->token, '/resources/files', $postfields);
             Helper::ta($out);
+
+            ## Если есть файлы на Я.Диске
+            if (isset($out) && is_array($out) && isset($out['items']) && is_array($out['items']) && count($out['items']) && $new_links_count) {
+
+                ## Перебираем все файлы
+                foreach ($out['items'] as $item) {
+
+                    ## Если в БД есть запись (без ссылки) для файла (с Я.Диска) с текущим именем - получим ссылку
+                    if (isset($new_links[basename($item['path'])])) {
+
+                        $result = yadisk_request($this->token, '/resources/download', ['path' => $item['path']]);
+                        Helper::ta($result);
+
+                        $new_links_count--;
+                        if (!$new_links_count)
+                            break;
+                    }
+                }
+            }
+
+            Helper::tad($new_links);
 
             ## Перебираем все записи без ссылки, и обновляем ссылку
             foreach ($records as $record) {
@@ -229,6 +258,7 @@ window.close();
         }
         */
 
+        /*
         ## Ищем нужный файл по имени среди всех переданных значений
         $file = null;
         $files = @$out['_embedded']['items'];
@@ -256,6 +286,7 @@ window.close();
             ## Здесь нужно будет обновить ссылку на файл для записи (видимо по id)
             ##
         }
+        */
     }
 }
 
