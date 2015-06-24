@@ -235,8 +235,10 @@ window.close();
                     ## Если в БД есть запись (без ссылки) для файла (с Я.Диска) с текущим именем - получим ссылку
                     if (isset($new_links[basename($item['path'])])) {
 
+                        ## Получаем ссылку на скачивание
+                        ## https://tech.yandex.ru/disk/api/reference/content-docpage/
                         $result = yadisk_request($this->token, '/resources/download', ['path' => $item['path']]);
-                        #Helper::ta($result);
+                        Helper::ta($result);
 
                         if (isset($result) && is_array($result) && isset($result['href']) && $result['href'])
                             $new_links[basename($item['path'])] = $result['href'];
