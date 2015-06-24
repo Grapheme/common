@@ -222,7 +222,7 @@ window.close();
             ## Получаем плоский список всех файлов
             ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
             $out = yadisk_request($this->token, '/resources/files', $postfields);
-            Helper::ta($out);
+            #Helper::ta($out);
 
             ## Если есть файлы на Я.Диске
             if (isset($out) && is_array($out) && isset($out['items']) && is_array($out['items']) && count($out['items']) && $new_links_count) {
@@ -234,7 +234,8 @@ window.close();
                     if (isset($new_links[basename($item['path'])])) {
 
                         $result = yadisk_request($this->token, '/resources/download', ['path' => $item['path']]);
-                        Helper::ta($result);
+                        #Helper::ta($result);
+
                         if (isset($result) && is_array($result) && isset($result['href']) && $result['href'])
                             $new_links[basename($item['path'])] = $result['href'];
 
@@ -245,13 +246,24 @@ window.close();
                 }
             }
 
-            Helper::tad($new_links);
+            #Helper::tad($new_links);
 
             ## Перебираем все записи без ссылки, и обновляем ссылку
             foreach ($records as $record) {
-                Helper::ta($record);
+
+                #Helper::ta($record);
+
+                if (isset($new_links[$record->yad_name]) && $new_links[$record->yad_name]) {
+
+                    $record->yad_link = $new_links[$record->yad_name];
+                    $record->save();
+                }
             }
         }
+
+        ## Получаем записи со ссылкой на видео
+        $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '!=', '')->get();
+        Helper::tad($records);
 
 
         /*
