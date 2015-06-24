@@ -200,6 +200,13 @@ window.close();
         $out = yadisk_request($this->token, '/resources', $postfields);
         #*/
 
+        $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '')->get();
+        if (count($records)) {
+            foreach ($records as $record) {
+                Helper::ta($record);
+            }
+        }
+
         ## Опции запроса
         $postfields = [
             'limit' => '10000',
