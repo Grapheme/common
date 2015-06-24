@@ -281,7 +281,7 @@ window.close();
             $return = implode("\n", $lines);
         }
 
-        return Response::make($return, 200);
+        return Response::make($return, 200, ['Content-Type' => 'application/csv']);
 
         /*
         if (Input::get('debug') == 1) {
