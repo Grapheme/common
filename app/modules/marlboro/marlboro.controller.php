@@ -265,7 +265,8 @@ window.close();
 
         ## Получаем записи со ссылкой на видео
         $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '!=', '')->get();
-        Helper::tad($records);
+        #Helper::tad($records);
+
         if (count($records)) {
 
             $lines = [];
