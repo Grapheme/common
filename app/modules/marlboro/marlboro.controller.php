@@ -184,6 +184,8 @@ window.close();
 
         Allow::permission(self::$group, 'read_disk');
 
+        $return = '';
+
         ## Имя файла, которое будем искать
         #$filename = 'digital.sql.gz';
         $filename = Input::get('file');
@@ -264,7 +266,19 @@ window.close();
         ## Получаем записи со ссылкой на видео
         $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '!=', '')->get();
         Helper::tad($records);
+        if (count($records)) {
 
+            $lines = [];
+
+            foreach ($records as $record) {
+
+                $lines[] = '"' . implode('";"', [$record->user_id, $record->city, $record->yad_name, $record->yad_link]) . '"';
+            }
+
+            $return = implode("\n", $lines);
+        }
+
+        return Response::make($return, 200);
 
         /*
         if (Input::get('debug') == 1) {
