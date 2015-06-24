@@ -236,8 +236,7 @@ window.close();
                         $result = yadisk_request($this->token, '/resources/download', ['path' => $item['path']]);
                         Helper::ta($result);
                         if (isset($result) && is_array($result) && isset($result['href']) && $result['href'])
-                            $new_link[basename($item['path'])] = $result['href'];
-
+                            $new_links[basename($item['path'])] = $result['href'];
 
                         $new_links_count--;
                         if (!$new_links_count)
