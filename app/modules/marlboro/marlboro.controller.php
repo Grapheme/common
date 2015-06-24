@@ -237,7 +237,7 @@ window.close();
 
                         ## Получаем ссылку на скачивание
                         ## https://tech.yandex.ru/disk/api/reference/content-docpage/
-                        $result = yadisk_request($this->token, '/resources/download', ['path' => $item['path']]);
+                        $result = yadisk_request($this->token, '/resources/download', ['path' => urlencode($item['path'])]);
                         #Helper::ta($result);
 
                         if (isset($result) && is_array($result) && isset($result['href']) && $result['href'])
