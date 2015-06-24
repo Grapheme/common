@@ -17,7 +17,7 @@ class CreateMarlboroYaDiskTables extends Migration {
                 $table->string('user_id')->default('')->index();
                 $table->string('city')->default('')->index();
                 $table->string('yad_name')->default('')->index();
-                $table->string('yad_link')->default('')->index();
+                $table->string('yad_link', 2048)->default('')->index();
                 $table->timestamps();
             });
             echo(' + ' . $this->table . PHP_EOL);

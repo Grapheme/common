@@ -224,7 +224,7 @@ window.close();
             ## Получаем плоский список всех файлов
             ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
             $out = yadisk_request($this->token, '/resources/files', $postfields);
-            Helper::ta($out);
+            #Helper::ta($out);
 
             ## Если есть файлы на Я.Диске
             if (isset($out) && is_array($out) && isset($out['items']) && is_array($out['items']) && count($out['items']) && $new_links_count) {
