@@ -206,6 +206,7 @@ window.close();
             'offset' => '0',
         ];
         ## Получаем плоский список всех файлов
+        ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
         $out = yadisk_request($this->token, '/resources/files', $postfields);
 
         if (Input::get('debug') == 1) {
