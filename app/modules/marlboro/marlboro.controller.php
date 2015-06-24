@@ -281,7 +281,7 @@ window.close();
             $return = implode("\n", $lines);
         }
 
-        return Response::make($return, 200, ['Content-Type' => 'application/csv']);
+        return Response::make($return, 200, ['Content-Type' => 'application/csv', 'Content-Disposition' => 'attachment; filename="report_'.date('Y-m-d').'.csv"']);
 
         /*
         if (Input::get('debug') == 1) {
