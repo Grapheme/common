@@ -54,13 +54,14 @@ class MarlboroController extends BaseController {
         if (Allow::action(self::$group, 'update_token', true, false)) {
 
             $menu[] = array(
-                'title' => 'Marlboro - YaDisk Token',
+                'title' => 'Marlboro - видео',
                 'link' => self::$group . '/' . 'token',
                 'class' => 'fa-list-alt',
                 'permit' => 'view',
             );
         }
 
+        /*
         if (Allow::action(self::$group, 'read_disk', true, false)) {
 
             $menu[] = array(
@@ -70,6 +71,7 @@ class MarlboroController extends BaseController {
                 'permit' => 'view',
             );
         }
+        */
 
         return $menu;
     }
