@@ -200,25 +200,34 @@ window.close();
         $out = yadisk_request($this->token, '/resources', $postfields);
         #*/
 
+        ## Получаем записи без ссылки на видео
         $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '')->get();
+
+        ## Если есть записи без видео - обработаем их
         if (count($records)) {
+
+            ## Опции запроса
+            $postfields = [
+                'limit' => '10000',
+                'offset' => '0',
+            ];
+            ## Получаем плоский список всех файлов
+            ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
+            $out = yadisk_request($this->token, '/resources/files', $postfields);
+            Helper::ta($out);
+
+            ## Перебираем все записи без ссылки, и обновляем ссылку
             foreach ($records as $record) {
                 Helper::ta($record);
             }
         }
 
-        ## Опции запроса
-        $postfields = [
-            'limit' => '10000',
-            'offset' => '0',
-        ];
-        ## Получаем плоский список всех файлов
-        ## https://tech.yandex.ru/disk/api/reference/all-files-docpage/
-        $out = yadisk_request($this->token, '/resources/files', $postfields);
 
+        /*
         if (Input::get('debug') == 1) {
             Helper::tad($out);
         }
+        */
 
         ## Ищем нужный файл по имени среди всех переданных значений
         $file = null;
