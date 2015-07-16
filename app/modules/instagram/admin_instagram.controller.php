@@ -273,6 +273,7 @@ class AdminInstagramController extends BaseController {
     public function getInstagramApproved() {
 
         $tags = Input::get('tags');
+        $limit = (int)abs(Input::get('limit')) ?: 0;
         #Helper::tad($tags);
 /*
         $temp = InstagramTags::whereIn('tag', $tags)->with(['photo' => function($query){
@@ -303,6 +304,7 @@ class AdminInstagramController extends BaseController {
 
         $return = [];
 
+        $counts = [];
         if (isset($results) && count($results)) {
 
             foreach ($results as $tag => $photos) {
@@ -311,14 +313,20 @@ class AdminInstagramController extends BaseController {
 
                     if (!isset($return[$tag])) {
                         $return[$tag] = [];
+                        $counts[$tag] = 0;
                     }
 
                     foreach ($photos as $photo) {
 
-                        $return[$tag][$photo->id] = [
-                            'image' => $photo->image,
-                            'link' => $photo->link,
-                        ];
+                        if ($limit == 0 || $counts[$tag] < $limit) {
+
+                            $return[$tag][$photo->id] = [
+                                'image' => $photo->image,
+                                'link' => $photo->link,
+                            ];
+
+                            ++$counts[$tag];
+                        }
                     }
                 }
 
