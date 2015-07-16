@@ -274,14 +274,11 @@ class AdminInstagramController extends BaseController {
 
         $tags = Input::get('tags');
         $limit = (int)abs(Input::get('limit')) ?: 0;
+
+        if (!is_array($tags))
+            $tags = (array)$tags;
+
         #Helper::tad($tags);
-/*
-        $temp = InstagramTags::whereIn('tag', $tags)->with(['photo' => function($query){
-            $query->where('status', 2);
-        }])->get();
-        Helper::tad($temp);
-        return $temp->toJson();
-*/
 
         $temp = InstagramTags::whereIn('tag', $tags)->lists('tag', 'instagram_id');
         #Helper::tad($temp);
@@ -335,7 +332,7 @@ class AdminInstagramController extends BaseController {
 
         #Helper::tad($return);
 
-        return Response::json(($return), 200);
+        return Response::json($return, 200);
     }
 }
 
