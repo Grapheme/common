@@ -315,6 +315,16 @@ class AdminInstagramController extends BaseController {
 
                     foreach ($photos as $photo) {
 
+                        $valid_image = false;
+
+                        $curl = curl_init($photo->image);
+                        curl_setopt($curl, CURLOPT_NOBODY, true);
+                        $result = curl_exec($curl);
+                        $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                        curl_close($curl);
+
+                        echo $statusCode . ' / ';
+
                         if ($limit == 0 || $counts[$tag] < $limit) {
 
                             $return[$tag][$photo->id] = [
