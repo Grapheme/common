@@ -323,7 +323,7 @@ class AdminInstagramController extends BaseController {
                         $statusCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
                         curl_close($curl);
 
-                        #echo $statusCode . ' / ';
+                        echo $photo->image . ' = ' . $statusCode . "<br/>\n";
 
                         if ($statusCode != 404 && $limit == 0 || $counts[$tag] < $limit) {
 
