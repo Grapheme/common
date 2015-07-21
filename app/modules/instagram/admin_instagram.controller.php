@@ -325,7 +325,7 @@ class AdminInstagramController extends BaseController {
 
                         #echo $statusCode . ' / ';
 
-                        if ($limit == 0 || $counts[$tag] < $limit) {
+                        if ($statusCode != 404 && $limit == 0 || $counts[$tag] < $limit) {
 
                             $return[$tag][$photo->id] = [
                                 'image' => $photo->image,
