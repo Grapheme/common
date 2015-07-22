@@ -306,7 +306,7 @@ window.close();
             $records = $records->where('created_at', '<=', $to);
         }
         $records = $records->get();
-        Helper::tad($records);
+        #Helper::tad($records);
 
         if (count($records)) {
 
