@@ -13,7 +13,17 @@
         <a href="https://oauth.yandex.ru/authorize?response_type=code&client_id={{ Config::get('site.marlboro.app_id') }}" class="btn btn-default" target="_blank">Обновить токен</a>
     @endif
 
+    <div class="clear"></div>
+
+    <br/>
+
     @if (Allow::action($module['group'], 'read_disk', true, false))
+
+        <form action="{{ URL::route('marlboro.read') }}" method="GET">
+
+            {{ Form::select('city', $cities) }}
+
+        </form>
 
         <a href="{{ URL::route('marlboro.read') }}" class="btn btn-default" target="_blank">Получить CSV</a>
     @endif
