@@ -21,7 +21,8 @@
 
         <form action="{{ URL::route('marlboro.read') }}" method="GET">
 
-            {{ Form::select('city', $cities) }}
+            {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
+            <button type="submit" class="btn btn-default" target="_blank">Получить CSV</button>
 
         </form>
 
