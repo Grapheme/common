@@ -12,6 +12,10 @@ class YaDiskVideo extends BaseModel {
         'city',
         'yad_name',
         'yad_link',
+
+        'firstname',
+        'lastname',
+        'patronymic',
     );
 
 }
