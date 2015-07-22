@@ -21,12 +21,17 @@
 
         <form action="{{ URL::route('marlboro.read') }}" method="GET" class="form-inline" target="_blank">
 
+            Город
+            {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
+            От
+            {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
+            До
             {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
             <button type="submit" class="btn btn-default">Получить CSV</button>
 
         </form>
 
-        <a href="{{ URL::route('marlboro.read') }}" class="btn btn-default" target="_blank">Получить CSV</a>
+{{--        <a href="{{ URL::route('marlboro.read') }}" class="btn btn-default" target="_blank">Получить CSV</a>--}}
     @endif
 
     <div class="clear"></div>
