@@ -24,14 +24,10 @@
             Город:
             {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
             От:
-            {{ Form::text('from', null, ['class' => 'datepicker']) }}
+            {{ Form::text('from', date('d.m.Y', time()-60*60*24*7), ['class' => 'datepicker']) }}
             До:
-            {{ Form::text('to', null, ['class' => 'datepicker']) }}
+            {{ Form::text('to', date('d.m.Y'), ['class' => 'datepicker']) }}
             <button type="submit" class="btn btn-default">Получить CSV</button>
-
-            <div class="input date">
-                <input class="text-center datepicker" style="width: 221px" placeholder="Нажмите для выбора" name="fields[published_at]" type="text" value="01.07.2015">
-            </div>
 
         </form>
 
