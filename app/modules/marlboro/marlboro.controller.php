@@ -124,7 +124,12 @@ class MarlboroController extends BaseController {
             'yad_name'      => Input::get('yad_name'),
         ];
 
-        if ($input['user_id'] && $input['city'] && $input['yad_name']) {
+        if (
+            true
+            #&& $input['user_id']
+            && $input['city']
+            && $input['yad_name']
+        ) {
 
             YaDiskVideo::create($input);
             $json_response['status'] = true;
