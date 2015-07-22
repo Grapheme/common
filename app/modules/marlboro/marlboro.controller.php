@@ -105,7 +105,7 @@ class MarlboroController extends BaseController {
 
         $token = $this->token;
 
-        $cities = YaDiskVideo::select('city')->distinct()->lists('city');
+        $cities = YaDiskVideo::select('city')->distinct()->orderBy('city', 'asc')->lists('city', 'city');
         Helper::tad($cities);
 
         return View::make($this->module['gtpl'].'yadisk_token', compact('faces', 'token'));
