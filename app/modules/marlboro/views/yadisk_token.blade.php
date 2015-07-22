@@ -19,10 +19,10 @@
 
     @if (Allow::action($module['group'], 'read_disk', true, false))
 
-        <form action="{{ URL::route('marlboro.read') }}" method="GET" class="form-inline">
+        <form action="{{ URL::route('marlboro.read') }}" method="GET" class="form-inline" target="_blank">
 
             {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
-            <button type="submit" class="btn btn-default" target="_blank">Получить CSV</button>
+            <button type="submit" class="btn btn-default">Получить CSV</button>
 
         </form>
 
