@@ -44,5 +44,18 @@
 
 
 @section('scripts')
+    <script>
+        $('.datepicker').each(function() {
+
+            $this = $(this);
+            var dataDateFormat = $this.attr('data-dateformat') || 'dd.mm.yy';
+
+            $this.datepicker({
+                dateFormat : dataDateFormat,
+                prevText : '<i class="fa fa-chevron-left"></i>',
+                nextText : '<i class="fa fa-chevron-right"></i>',
+            });
+        })
+    </script>
 @stop
 
