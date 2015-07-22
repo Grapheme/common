@@ -14,7 +14,12 @@ class CreateMarlboroYaDiskTables extends Migration {
             Schema::create($this->table, function(Blueprint $table) {
 
                 $table->increments('id');
+
                 $table->string('user_id')->default('')->index();
+                $table->string('firstname')->default('')->index();
+                $table->string('lastname')->default('')->index();
+                $table->string('patronymic')->default('')->index();
+
                 $table->string('city')->default('')->index();
                 $table->string('yad_name')->default('')->index();
                 $table->string('yad_link', 2048)->default('')->index();

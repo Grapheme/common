@@ -114,9 +114,14 @@ class MarlboroController extends BaseController {
         $json_response = ['status' => false];
 
         $input = [
-            'user_id' => Input::get('id'),
-            'city' => Input::get('city-chose'),
-            'yad_name' => Input::get('yad_name'),
+            'city'          => Input::get('city-chose'),
+
+            #'user_id'       => Input::get('id'),
+            'firstname'     => Input::get('firstname'),
+            'lastname'      => Input::get('lastname'),
+            'patronymic'    => Input::get('patronymic'),
+
+            'yad_name'      => Input::get('yad_name'),
         ];
 
         if ($input['user_id'] && $input['city'] && $input['yad_name']) {
@@ -277,7 +282,15 @@ window.close();
 
             foreach ($records as $record) {
 
-                $lines[] = '"' . implode('";"', [$record->user_id, $record->city, $record->yad_name, $record->yad_link]) . '"';
+                #$lines[] = '"' . implode('";"', [$record->user_id, $record->city, $record->yad_name, $record->yad_link]) . '"';
+
+                /*
+                'firstname' => Input::get('firstname'),
+                'lastname' => Input::get('lastname'),
+                'patronymic' => Input::get('patronymic'),
+                */
+
+                $lines[] = '"' . implode('";"', [$record->firstname, $record->lastname, $record->patronymic, $record->city, $record->yad_name, $record->yad_link]) . '"';
             }
 
             $return = implode("\n", $lines);
