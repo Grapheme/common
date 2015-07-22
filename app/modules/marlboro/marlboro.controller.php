@@ -284,18 +284,28 @@ window.close();
         $city = Input::get('city') ?: null;
         $from = Input::get('from') ?: null;
         if (preg_match('~\d{2}\.\d{2}\.\d{4}~', $from)) {
-            $from = (new Carbon())->createFromFormat('d.m.Y', $from)->format('D-m-y');
+            $from = (new Carbon())->createFromFormat('d.m.Y', $from)->format('Y-m-d');
         }
         $to   = Input::get('to')   ?: null;
         if (preg_match('~\d{2}\.\d{2}\.\d{4}~', $to)) {
-            $to = (new Carbon())->createFromFormat('d.m.Y', $to)->format('D-m-y');
+            $to = (new Carbon())->createFromFormat('d.m.Y', $to)->format('Y-m-d');
         }
-        Helper::d($city);
-        Helper::d($from);
-        Helper::dd($to);
+        #Helper::d($city);
+        #Helper::d($from);
+        #Helper::dd($to);
 
         ## Получаем записи со ссылкой на видео
-        $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '!=', '')->get();
+        $records = YaDiskVideo::orderBy('created_at', 'ASC')->where('yad_link', '!=', '');
+        if ($city) {
+            $records = $records->where('city', $city);
+        }
+        if ($from) {
+            $records = $records->where('created_at', '>=', $from);
+        }
+        if ($to) {
+            $records = $records->where('created_at', '<=', $to);
+        }
+        $records = $records->get();
         #Helper::tad($records);
 
         if (count($records)) {
