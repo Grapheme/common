@@ -29,6 +29,10 @@
             {{ Form::text('to', null, ['class' => 'datepicker']) }}
             <button type="submit" class="btn btn-default">Получить CSV</button>
 
+            <div class="input date">
+                <input class="text-center datepicker" style="width: 221px" placeholder="Нажмите для выбора" name="fields[published_at]" type="text" value="01.07.2015">
+            </div>
+
         </form>
 
 {{--        <a href="{{ URL::route('marlboro.read') }}" class="btn btn-default" target="_blank">Получить CSV</a>--}}
