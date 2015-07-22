@@ -22,9 +22,9 @@
         <form action="{{ URL::route('marlboro.read') }}" method="GET" class="form-inline" target="_blank">
 
             Город:
-            {{ Form::select('city', $cities, null, ['class' => 'form-control']) }}
+            {{ Form::select('city', $cities, null, ['class' => 'form-control text-center']) }}
             От:
-            {{ Form::text('from', date('d.m.Y', time()-60*60*24*7), ['class' => 'datepicker']) }}
+            {{ Form::text('from', date('d.m.Y', time()-60*60*24*7), ['class' => 'datepicker text-center']) }}
             До:
             {{ Form::text('to', date('d.m.Y'), ['class' => 'datepicker']) }}
             <button type="submit" class="btn btn-default">Получить CSV</button>
