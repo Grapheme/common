@@ -305,6 +305,7 @@ window.close();
         if ($to) {
             $records = $records->where('created_at', '<=', $to);
         }
+        dd($records->toSql());
         $records = $records->get();
         #Helper::tad($records);
 
