@@ -307,8 +307,8 @@ window.close();
         }
         #dd($records->toSql());
         $records = $records->get();
-        Helper::smartQueries(1);
-        Helper::tad($records);
+        #Helper::smartQueries(1);
+        #Helper::tad($records);
 
         if (count($records)) {
 
