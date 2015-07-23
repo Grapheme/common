@@ -288,7 +288,7 @@ window.close();
         }
         $to   = Input::get('to')   ?: null;
         if (preg_match('~\d{2}\.\d{2}\.\d{4}~', $to)) {
-            $to = (new Carbon())->createFromFormat('d.m.Y', $to)->format('Y-m-d');
+            $to = (new Carbon())->createFromFormat('d.m.Y', $to)->addDay()->format('Y-m-d');
         }
         #Helper::d($city);
         #Helper::d($from);
@@ -303,7 +303,7 @@ window.close();
             $records = $records->where('created_at', '>=', $from);
         }
         if ($to) {
-            $records = $records->where('created_at', '<=', $to);
+            $records = $records->where('created_at', '<', $to);
         }
         #dd($records->toSql());
         $records = $records->get();
