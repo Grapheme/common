@@ -94,6 +94,13 @@
         background: url(/uploads/img/marlboro/deco.png) no-repeat;
         background-position: center bottom;
       }
+      #header *{
+        color: black !important;
+      }
+      
+      #header {
+        background-color: transparent !important;
+      }
       #content .label {
         color: #e7332e !important;
         width: 50px;
