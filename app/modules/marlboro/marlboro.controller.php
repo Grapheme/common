@@ -305,9 +305,10 @@ window.close();
         if ($to) {
             $records = $records->where('created_at', '<=', $to);
         }
-        dd($records->toSql());
+        #dd($records->toSql());
         $records = $records->get();
-        #Helper::tad($records);
+        Helper::smartQueries(1);
+        Helper::tad($records);
 
         if (count($records)) {
 
