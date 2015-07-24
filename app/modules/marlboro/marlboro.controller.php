@@ -324,10 +324,15 @@ window.close();
                 'patronymic' => Input::get('patronymic'),
                 */
 
+                $record->patronymic = preg_replace('~[^\d]+~is', '', $record->patronymic);
+
                 $lines[] = '"' . implode('";"', [$record->firstname, $record->lastname, $record->patronymic, $record->city, $record->yad_name, $record->yad_link]) . '"';
             }
 
             $return = implode("\n", $lines);
+
+            ## BOM
+            $return = chr(0xEF).chr(0xBB).chr(0xBF) . $return;
         }
 
         return Response::make($return, 200, ['Content-Type' => 'application/csv', 'Content-Disposition' => 'attachment; filename="report_'.date('Y-m-d').'.csv"']);
