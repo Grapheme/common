@@ -142,9 +142,18 @@
         margin-top: 10px;
       }
       
+      #logo-group {
+        display: none;
+      }
+      
+      #logout {
+        display: none;
+      }
+      
       #content .form-inline {
         display: inline-block;
         text-align: left;
+        margin-left: -53px;
       }
       
       #content * {
