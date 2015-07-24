@@ -13,9 +13,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => '__DBNAME__',
-			'username'  => '__UDBSER__',
-			'password'  => '__DBPASS__',
+			'database'  => 'common',
+			'username'  => 'root',
+			'password'  => 'password',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

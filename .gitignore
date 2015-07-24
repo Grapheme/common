@@ -30,6 +30,7 @@ _ide_helper.php
 /public/uploads/galleries/*
 /public/uploads/galleries/thumbs/*
 /public/uploads/thumbnail/*
+/public/uploads/
 
 /public/static/psd
 /usersfiles
