@@ -24,7 +24,10 @@
         <form action="{{ URL::route('marlboro.read') }}" method="GET" class="form-inline" target="_blank">
 
             <label><span class="label">Город:</span>
-            {{ Form::select('city', $cities, null, ['class' => 'form-control text-center']) }}</label>
+            <span class="select-holder">
+            {{ Form::select('city', $cities, null, ['class' => 'form-control text-center']) }}  
+            </span>
+            </label>
             <br>
             <label><span class="label">От:</span>
             {{ Form::text('from', date('d.m.Y', time()-60*60*24*7), ['class' => 'datepicker text-center']) }}
@@ -34,7 +37,7 @@
             {{ Form::text('to', date('d.m.Y'), ['class' => 'datepicker']) }}
             </label>
             <br>
-            <center>
+            <center style="text-align: right;">
               <button type="submit" class="btn btn-default">Получить CSV</button>
             </center>
 
@@ -93,6 +96,8 @@
         margin-left: 0;
         background: url(/uploads/img/marlboro/deco.png) no-repeat;
         background-position: center bottom;
+        background-position: center 97%;
+        background-size: 40%;
       }
       #header *{
         color: black !important;
@@ -109,6 +114,11 @@
         display: inline-block;
       }
       
+      #content button {
+        position: relative;
+        left: -3px;
+      }
+      
       #content button, #content .btn {
         border: none;
         background: none;
@@ -123,7 +133,7 @@
         border: 3px solid #ee1c24;
         padding: 20px 50px;
         border-radius: 50px;
-        margin-top: 20px;
+        margin-top: 10px;
         background: #fcfcfc;
       }
       #content a.btn {
@@ -140,6 +150,24 @@
       #content * {
         font-family: 'museo_sans_cyrl100' !important;
       }
+      #content .select-holder{
+        position: relative;
+        display: inline-block;
+      }
+      
+      #content .select-holder:after{
+        content: '▾';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #424242;
+        background: transparent;
+        width: 20px;
+        margin-top: 0px;
+        padding: 10px 0px;
+        pointer-events: none;
+      }
       #content input, #content select{
         position: relative;
         border: 1px solid #5b5b5b;
@@ -148,14 +176,17 @@
         background: none;
         padding: 0;
         margin: 0;
-        font-family: "museo_sans_cyrl700" !important;
+        font-family: "museo_sans_cyrl100" !important;
         font-size: 18px;
         color: #424242;
         height: 40px;
-        padding: 0 10px;
+        padding: 0 30px;
         text-align: center;
-        width: 200px;
+        width: 260px;
         border-radius: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         
       }
       #left-panel {
