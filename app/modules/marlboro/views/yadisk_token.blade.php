@@ -143,11 +143,17 @@
       }
       
       #logo-group {
-        display: none;
+        display: none !important;
       }
       
-      #logout {
-        display: none;
+      #logout .logout-text {
+        display: inline-block;
+        position: relative;
+        top: 100px;
+      }
+      
+      #logout  {
+        margin-top: -100px;
       }
       
       #content .form-inline {
